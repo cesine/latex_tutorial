@@ -1,0 +1,165 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -*- Mode: Latex -*- %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Diagrams-EmacsHistory.tex --- Example of flow diagram: the history of Emacs
+%%
+%% Author          : Denis GIROU (CNRS/IDRIS - France) <Denis.Girou@idris.fr>
+%% Created the     : February 1996
+%% Last mod. by    : Denis GIROU (CNRS/IDRIS - France) <Denis.Girou@idris.fr>
+%% Last mod. the   : Wed Apr  2 21:37:04 1997
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper]{article}
+
+\usepackage{pstcol} % To use the standard "color" package with PSTricks
+\usepackage{pst-node}
+
+\usepackage{graphics}
+
+\usepackage[T1]{fontenc}
+\usepackage{times}\fontfamily{ptm}\selectfont
+
+\setlength{\textheight}{29.7cm}
+\setlength{\textwidth}{21cm}
+\setlength{\oddsidemargin}{0mm}
+
+% Definition of new colors
+\definecolor{Gold}        {rgb}{1.,0.84,0.}
+\definecolor{LemonChiffon}{rgb}{1.,0.98,0.8}
+\definecolor{LightBlue}   {rgb}{0.68,0.85,0.9}
+\definecolor{LightCyan}   {rgb}{0.88,1.,1.}
+\definecolor{PaleGreen}   {rgb}{0.88,1,0.88}
+\definecolor{Pink}        {rgb}{1.,0.75,0.8}
+
+\newlength\LengthA
+\setlength{\LengthA}{5cm}
+
+\newcommand{\ShortStack}[1]{\tabcolsep=0pt\begin{tabular}[t]{c}#1\end{tabular}}
+
+\newcommand{\MyBox}[3]{%
+\psshadowbox[fillstyle=solid,fillcolor=#3]{%
+\parbox{#1}{\bfseries\centering\begin{tabular}[t]{c}#2\end{tabular}}}}
+
+\newcommand{\MyBoxA}[4]{%
+\ShortStack{\MyBox{\LengthA}{\Large #1}{#3}\\[-3pt]
+            \MyBox{\LengthA}{#2}{#4}}}
+
+\newcommand{\LabelA}[2]{\MyBoxA{#1}{#2}{red}{LemonChiffon}}
+\newcommand{\LabelB}[2]{\MyBoxA{#1}{#2}{LightCyan}{PaleGreen}}
+\newcommand{\LabelC}[2]{\MyBoxA{#1}{#2}{Gold}{Pink}}
+
+% Definition of nodes ("boxes")
+\newcommand{\TECO}{\LabelA{TECO}{%
+            \textit{Tape Editor and COrrector}\\
+            \ $\rightarrow$ \textit{Text Editor and COrrector}\\
+            DEC / PDP}}
+\newcommand{\Emacs}{\LabelA{Emacs}{%
+            Since \textcolor{cyan}{1975}\\MIT\\
+            Richard Stallmann\\(Guy Steele)\\
+            \textcolor{red}{Full page mode}\\PDP assembly language}}
+\newcommand{\MulticsEmacs}{\LabelA{Multics Emacs}{%
+            Since \textcolor{cyan}{1978}\\Honeywell Bull\\
+            Bernard Greenberg\\\textcolor{red}{PL1 / Lisp}}}
+\newcommand{\GoslingEmacs}{\LabelA{Gosling Emacs}{%
+            James Gosling\\\textcolor{red}{Unix}\\
+            \textcolor{red}{C} / Mock Lisp}}
+\newcommand{\EmacsEighteen}{\LabelA{Emacs 18}{%
+            Since \textcolor{cyan}{1985}\\Free Software Foundation\\
+            Richard Stallmann\\
+            18.1 $\rightarrow$ 18.59\\C / \textcolor{red}{Emacs Lisp}}}
+\newcommand{\Epoch}{\LabelA{Epoch}{%
+            \textcolor{cyan}{1988--1992}\\
+            University of Illinois\\
+            Alan Carroll\\
+            (Christopher Love)\\
+            1.0 $\rightarrow$ 4.2\\
+            Unix\\\textcolor{red}{Under X-Window}}}
+\newcommand{\MULE}{\LabelA{MULE}{%
+            \textcolor{red}{MULtilangual}\\Enhancement to Emacs\\
+            Electrotechnical Laboratory\\Tokyo\\Kenichi Handa}}
+\newcommand{\EmacsDP}{\LabelA{\shortstack{Public domain\\implementations}}{%
+            8 bits support (europ. languages)\\Hebrew support\\
+            micro-emacs\\JOVE\\KEmacs\\Nemacs\\Alpha (Mac)\\etc.}}
+\newcommand{\EmacsCom}{\LabelA{\shortstack{Commercial\\implementations}}{%
+            Brief\\CCA Emacs\\Epsilon\\Unipress Emacs\\etc.}}
+\newcommand{\lemacs}{\LabelA{lemacs}{%
+            \textcolor{cyan}{1992--1994}\\
+            Lucid Inc.\\Jamie Zawinski\\(Richard Mlynarik)\\
+            Unix\\19.1 $\rightarrow$ 19.10}}
+\newcommand{\XEmacs}{\LabelB{XEmacs}{%
+            Since \textcolor{cyan}{1994}\\
+            Sun Microsystems\\University of Illinois\\
+            Chuck Thompson / Ben Wing\\
+            Unix\\19.11 $\rightarrow$ \textcolor{green}{19.14}}}
+\newcommand{\WinEmacslemacs}{\LabelB{WinEmacs}{%
+            Based on lemacs 19.6\\Windows 3.1}}
+\newcommand{\WinEmacsXEmacs}{\LabelC{WinEmacs}{%
+            \textcolor{cyan}{1997 ?}\\Based on XEmacs 19.13\\Windows 3.1 / 95}}
+\newcommand{\EmacsNineteen}{\LabelB{Emacs 19}{%
+            Since \textcolor{cyan}{1993}\\
+            Free Software Foundation\\Richard Stallmann\\
+            Unix, Win 3.1/95/NT, OS/2, etc.\\Under X-Window, etc.\\
+            19.1 $\rightarrow$ \textcolor{green}{19.34}}}
+\newcommand{\InfoDock}{\LabelB{InfoDock}{%
+            Since \textcolor{cyan}{1994}\\Motorola\\Bob Weiner\\Unix}}
+\newcommand{\XEmacsTwenty}{%
+            \LabelC{XEmacs}{\textcolor{cyan}{1997 ?}\\Unix\\19.20}}
+
+\newcommand{\EmacsHistory}{%
+\begin{psmatrix}[rowsep=0.3,colsep=0.5]
+  % Nodes
+  & & & [name=TECO]  \TECO  \\
+  & & & [name=Emacs] \Emacs \\
+  & & & & [name=MulticsEmacs] \MulticsEmacs \\
+  & & & & [name=GoslingEmacs] \GoslingEmacs \\[5mm]
+  & & & [name=EmacsEighteen] \EmacsEighteen \\
+  & & [name=Epoch] \Epoch & & [name=MULE] \MULE &[name=EmacsDP] \EmacsDP &
+        [name=EmacsCom] \EmacsCom \\
+  & [name=lemacs] \lemacs \\[-1cm]
+  & & [name=WinEmacslemacs] \WinEmacslemacs \\
+  & [name=XEmacs] \XEmacs & & [name=EmacsNineteen] \EmacsNineteen \\[-1cm]
+  [name=InfoDock] \InfoDock \\
+  & [name=XEmacsTwenty] \XEmacsTwenty & [name=WinEmacsXEmacs] \WinEmacsXEmacs
+\end{psmatrix}
+
+% Links
+\psset{arrows=->,arrowsize=3pt 5}
+\ncline[arrowsize=3pt 3]{TECO}{Emacs}
+\ncline{Emacs}{EmacsEighteen}
+\ncline{EmacsEighteen}{EmacsNineteen}
+\ncangle[armB=0,angleB=90]{Emacs}{MulticsEmacs}
+\ncline[arrowsize=3pt 3]{MulticsEmacs}{GoslingEmacs}
+\ncangle[angleA=-90,angleB=90,armA=0.5,offsetA=-0.5,offsetB=0.5,arrowsize=3pt 3]%
+        {GoslingEmacs}{EmacsEighteen}
+\ncangle[angleA=-90,angleB=90,armB=4,offset=0.5]{GoslingEmacs}{EmacsCom}
+  \naput[npos=1.91]{Unipress Emacs}
+\ncangle[armB=0,angleB=90]{EmacsEighteen}{MULE}
+\ncangle[armB=0,angleB=90]{EmacsEighteen}{EmacsDP}
+\ncangle[armB=0,angleB=90,offsetB=-0.5]{EmacsEighteen}{EmacsCom}
+\ncangle[angleA=-90,angleB=90,offsetA=-0.5,arrowsize=3pt 3]%
+        {EmacsEighteen}{Epoch}
+\ncangle[armB=0,angleA=-180,angleB=90]{EmacsEighteen}{lemacs}
+\ncangle[armB=0,angleA=-180,angleB=90,offsetB=0.5]{Epoch}{lemacs}
+\ncangle[armB=0,angleB=90]{lemacs}{WinEmacslemacs}
+\ncline[linestyle=dashed]{WinEmacslemacs}{WinEmacsXEmacs}
+  \nbput{\shortstack{1\\9\\9\\7\\?}}
+\ncline{lemacs}{XEmacs}
+\ncangle[armB=0,angleA=-180,angleB=90]{XEmacs}{InfoDock}
+\ncangle[armB=0,angleB=90,linestyle=dashed,offsetB=-0.6]{XEmacs}{WinEmacsXEmacs}
+\ncline[linestyle=dashed]{XEmacs}{XEmacsTwenty}
+  \naput{\shortstack{1\\9\\9\\7}}
+\ncangle[linestyle=dashed,armB=1,angleA=-90,angleB=90,offsetB=0.5]%
+        {MULE}{XEmacsTwenty}
+  \trput[tpos=0.91,labelsep=0.3]{%
+    Main events in Emacs history --- \texttt{<Denis.Girou@idris.fr>}
+                                 --- V1.1 --- September 24, 1996}
+}
+
+\psset{dimen=middle}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\vspace*{-3.7cm}\hspace*{-2.7cm}
+\rotatebox{90}{\resizebox{27.7cm}{19cm}{\EmacsHistory}}
+
+\end{document}

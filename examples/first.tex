@@ -1,0 +1,134 @@
+\documentstyle [12pt]{report}
+\hyphenation{so-lil-o-quy}%shows how an unknown word can be hyphenated throughout the document.
+\begin{document}
+
+\title{MyFirst Document}
+\author{Cesine C \and Mrs. Fields\thanks{Without whose help, this endeavor would be fruitless}}
+\date{May 25th 2003}%if the \date command is omitted the current date is used or the command \today can be used (anywhere in the document)
+
+\maketitle
+\tableofcontents
+\clearpage %this makes the text go on the next page
+\chapter {HERE I GO!}
+\label{I_Go}
+
+This is the text of my first document in \LaTeX!
+A     second     sentance.
+It's much more fun to do \LaTeX\ than to
+just read about it.
+if you have an abreviathion that is a lowercase letter folowed by a period, use the space character (backslash) so that latex doesnt interprit it as a sentance boundary and put two spaces. this  etc.\ this should show up with only one space after it. etc. should show up with two spaces after it. upper case letters before a period are not treated as ends of sentances so you have to put a backslash folowwed by an at symbol. this is an examplE.\@ This is an example without the symbolS. ther should be only one space..
+\section{Spacing}
+Here begins the second paragraph. It follows a blank line. I don't have to indent; \LaTeX\ does that automatically.
+
+\noindent This paragraph won't be indented, since it starts with a special command fo r stopping pharagraph indentation.
+\section{Qotes}
+``this is a quote''
+
+Yesterday Sally asked, ``Is this how to do quotes?'' She recalled, ``The book says: `there is a difference between open and close quote marks'\,''.
+
+the command \, makes a small horizontal space\footnote{this was put between the single quote and the double quote}
+\section{dashes}
+Inter-word dashes, or hyphens, are made with one dash. Dashes for number ranges, like 6--12, are made with two dashes, and punctuation dashes are made with three dashes---like this!!!
+\section{Symbols}
+Let's see what's behind door \#1---and it is---\$10,000!
+\# \$ \% \& \~ \_ \^ \{ \} $<$ $>$ $\backslash$
+\section{Footnotes}
+Cats\footnote[5]{you can specify the number or symbol for the footnote optional arguments must be placed just after the command and before the braces. Warm, soft, furry animals.} are very intelligent.
+\section{Margin Notes}
+This is some text in a paragraph. It will have a marginal note\normalmarginpar \marginpar{this is a pretty note} which will be placed next to the paragraph.printing.\reversemarginpar\marginpar{this note will come out on the opposite side of the default note} the side taht the margin note will apear on depends on whether the is single or double sided printed
+
+x=y+2
+
+$x=y+2$
+\section {My First Math Formula}
+Here comes an in-line formula: $x^2+y^2=z^2$
+if $x=1$ and $y=2$ then $z=3$:
+Also, $x'+y' =z_{21}$.
+
+\section{Commentss}
+%this is a comment which cannot be seen
+
+This is real text. %This icoment won't print
+%This whole line is a comment tha t won't print
+Ths is more real text.
+
+%arguments go into the list of figures or list of tables\caption
+%arguments goes into the table of contents list of figures or list of tables\addcontentsline
+\section{Verbatim}
+Here is some text which cdescribes the \verb!\footnote!command.The exclaimationpoints in the comand can be any symbol if you ruesing ! in your code use something else like a ?.
+
+\verb!this wont print with symbols \latex\ !
+
+\begin{verbatim}
+I want all this text
+to come out verbatim!!
+Here is a \LaTeX\ command: \footnote(It won't work)
+%This line will not be a comment.
+
+\end{verbatim}
+\section{Typestyles and Sizes}
+Typestyle-changing commands give one a \bf powerful \rm feeling.
+
+The \bf rain \rm in \it Spain \rm falls \sl mainly \rm on the \sf plain! \rm
+
+\tiny this is tiny\\
+\scriptsize THis is script size\\
+\footnotesize This is footnote size\\
+\small THis is small\\
+\normalsize This is normal size\\
+\large This is large\\
+\Large This is larger\\
+\LARGE This is very large\\
+\huge THis is huge\\
+\Huge This is very huge\normalsize\\
+
+%to change the typestyle and size at the same time put the typestyle command after the size command
+
+The \tiny frightened kitten \normalsize raised its fur and \it hissed \rm at the \Large big German Shepherd. \normalsize
+
+The {\tiny frightened kitten} raised its fur and {\it hissed} at the {\Large big German Shepherd.}
+\section*{This Section will have no number and serves as a heading}
+
+you must always tex a document twice inorder to get a correct table of contents.
+\section[Entry for the T.O.C.]{Section Heading In the Text}
+you can have an optional argument if you want the table of contents entry to be different from the section heading
+\section*{this is the Heading}
+\addcontentsline{toc}{section}{This is the Heading}
+the addcontentsline must appear on the same page as the unnumberd heading inorder to have the right page number in the table of contents. this heading will appear in the table of contents dispite having no number.
+
+\section[HEading for the TOC]{Heading for the Text:alternateing TOC and Text headings}
+This is a section whose TOC entry is different from its heading in the text!
+
+Chapter \ref{I_Go} contains some of my very first \LaTeX\ commands!
+If latex isnt run twice then the references will apear as ?? it takes two runs for latex references to be resolved correctly. if you still have a ?? then the lable and the ref don't match.
+
+to reference a  page use \verb!\pageref!  see Chapter \ref{I_Go} on page \pageref{I_Go} for more.(this is just an example)
+\section{Hyphenation}
+latex automatically hohenates words so if you ahve a word that isnt in its dictionary youc an specify its hyphatin in between the \verb!\documentstyle! and the
+\verb!\begin{document}! command.
+
+\section{Quote vs Quotations}
+For a shore quottion, or a series of one liners:
+
+\begin{quote}
+``Is this how to do quotes?'', asked Sallly.
+
+``Very good, Sally!'', said Jane.
+
+``The book says `there is a difference between open and close quote marks'\,'', said Sally.
+
+``That is true.'', said Jane.
+\end{quote}
+
+For a quote of a paraghraph or more:
+
+\begin{quotation}
+Singing is perhaps the most personal of all the performing arts. WHne performing, a good singer makes each member of the audience feel as if he or she is receiving a generous and loving gift. Only in singing is ther ea direct, unhindered path between the muxic in the performer's heart and the listener's senses.
+\end{quotation}
+
+\appendix
+\chapter{THIS IS AN APPENDIX}
+THis is the text of the Appendix.
+\section {Subheading In An Appendix}
+How does this look?
+\end{document}

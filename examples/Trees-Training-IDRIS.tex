@@ -1,0 +1,76 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -*- Mode: Latex -*- %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Trees-Training-IDRIS.tex --- The training program of IDRIS
+%%
+%% Author          : Denis GIROU (CNRS/IDRIS - France) <Denis.Girou@idris.fr>
+%% Created the     : 1994
+%% Last mod. by    : Denis GIROU (CNRS/IDRIS - France) <Denis.Girou@idris.fr>
+%% Last mod. the   : Wed Apr  2 22:01:09 1997
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper]{article}
+
+\usepackage{lscape}
+\usepackage{pstcol} % To use the standard "color" package with PSTricks
+\usepackage{pst-tree}
+
+% Macros defining special leaves for the tree
+\newcommand{\MyBox}[1]{\Tr[ref=t]{\psshadowbox{#1}}}
+\newcommand{\MyBoxTabular}[1]{%
+\MyBox{%
+  \tabcolsep=0mm%
+  \renewcommand{\arraystretch}{0.5}%
+  \begin{tabular}{l}#1\end{tabular}}}
+\newcommand{\Session}[2]{%
+\Tr{\psframebox[fillstyle=solid,fillcolor=black]{%
+      \begin{tabular}{c}
+        \textcolor{white}{#1}\\
+        {\tiny\textcolor{white}{#2}}
+      \end{tabular}}}}
+
+% The links are at right angle
+\renewcommand{\psedge}[2]{\ncangle{#2}{#1}}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{landscape}
+  \begin{center}
+    \begin{figure}[!ht]
+      \psset{levelsep=3,treesep=0.1,armB=1,angleB=-90,angleA=90}
+      \psframebox[framesep=0.4,linearc=0.5,cornersize=absolute]{%
+        \pstree{\MyBox{\Large Cours IDRIS 1996--1997}}
+               {\pstree{\MyBox{\small Utilisation machines IDRIS}}
+                       {\pstree{\Session{\footnotesize T3E}{1/2/3 jours}}
+                               {\MyBox{\tiny Intro.}
+                                \MyBox{\tiny PVM}
+                                \MyBox{\tiny MPI}
+                                \MyBox{\tiny Optimisat.}
+                                \MyBoxTabular{{\tiny HPF-}\\
+                                              {\tiny CRAFT}}}
+                        \pstree{\Session{\footnotesize C90}{5 jours}}
+                               {\MyBox{\tiny Intro.}
+                                \MyBox{\tiny Vect.}
+                                \MyBoxTabular{{\tiny D\'ebogage}\\
+                                              {\tiny Optimisat.}}
+                                \MyBox{\tiny Atelier}
+                                \MyBox{\tiny Paral.}}
+                        \pstree{\Session{\footnotesize Grappe}{2 jours}}
+                               {\MyBoxTabular{{\tiny Util.}\\
+                                              {\tiny D\'ev. Fortran}}}}
+                \pstree{\MyBox{\small Langages}}
+                       {\Session{\footnotesize Fort. 90}{3 jours}
+                        \pstree{\Session{\footnotesize C}{5 jours}}
+                               {\Session{\footnotesize C++}{2 jours}}}
+                \pstree{\MyBox{\small Graphiques}}
+                       {\Session{\footnotesize 5 modules}{1 \`a 3 jours}}
+                \pstree{\MyBox{\footnotesize Aspects d'Unix}}
+                       {\Session{\footnotesize Adm./S\'ec.}{2 jours}}
+                \pstree{\MyBox{\small Chimie}}
+                       {\Session{\footnotesize Gaussian}{2 jours}}}}
+      \caption{Organisation des cours}
+    \end{figure}
+  \end{center}
+\end{landscape}
+
+\end{document}

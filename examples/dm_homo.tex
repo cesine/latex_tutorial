@@ -1,0 +1,291 @@
+\documentclass[10pt]{article}         
+\usepackage{tipa}
+\usepackage{covington}
+\usepackage{amssymb}  
+\usepackage{pifont}  
+\usepackage{epsfig} 
+\usepackage{epic}
+\usepackage{eepic}
+\newcounter{mine}
+\usepackage{fullpage}
+
+
+\begin{document}
+
+
+
+\thispagestyle{empty}
+
+\begin{center}
+\noindent \large Distributed Morphology\\
+\normalsize
+
+\end{center}
+\begin{center}{Homophony and the structure of the lexicon}
+\end{center}
+
+\section{How much homophony? How do we decide?}
+
+
+
+\begin{example}\label{prob}Three issues that need to be distinguished
+\begin{itemize}
+\item{{\em The AI Problem}: Simulation of human intelligence  without regard to whether the model proposed matches the computational methods used by humans (weak equivalence).}
+\item{{\em The Linguist's Problem}: Using insufficient/indeterminate data, figuring out which grammar a human acquires.}
+\item{{\em The Human's Problem}: Acquiring the grammar determined by UG + Experience.}
+\end{itemize}
+\end{example}
+
+\section{Accidental Homophony}
+
+\begin{example}
+\begin{itemize}
+\item{English {\it well/well, night/knight, red/read}}
+\item{Italian {\it sono} `I am' and `they are'}
+\item{English {\sc noun plural/possessive/3rd singular}}
+\end{itemize}
+\end{example}
+
+
+\section{Phonological Homophony}
+
+\begin{example}Phonological analysis
+\end{example}
+
+\begin{itemize}
+\item[a.]{{\it One-to-many mappings}: Deriving surface distinctions from  identical inputs---context sensitive processes.}
+\item[b.]{{\it Many-to-one-mappings}: Demonstrating that identical surface strings can correspond to   underlyingly distinct representations---neutralization processes (phonologically-based homophony}
+\end{itemize}
+
+
+
+
+
+
+\begin{example}Assimilation of {\it -r} to coronal sonorant under complex conditions (Reiss 1994)
+\end{example}
+
+\noindent \begin{tabular}{|l| l |l|l|l|l|} \hline 
+&{`home'}&{`stone'}&{`wagon'}&{`sky'}&{`friend'} \\ \cline{2-6} 
+{\sc nom}&{/heim-r/ $\rightarrow$ {\it heimr}}&{/stein-r/ $\rightarrow${\it steinn}} &{/vagn-r/ $\rightarrow${\it vagn}}&{/himin-r/ $\rightarrow${\it himinn}}&{/vin-r/ $\rightarrow${\it vinr}}\\ 
+{\sc acc}&{/heim-$\emptyset$/ $\rightarrow${\it heim}}&{/stein-$\emptyset$/ $\rightarrow${\it stein}}&{/vagn-$\emptyset$/ $\rightarrow${\it vagn}}&{/himin-$\emptyset$/ $\rightarrow${\it himin}}&{/vin-$\emptyset$/ $\rightarrow${\it vin}} \\ \hline
+\end{tabular}
+
+
+
+
+
+
+\section{Morphological Homophony or Vagueness?}
+\begin{example}Morphological analysis
+\end{example}
+
+\begin{itemize}
+\item[a.]{{\it One-to-many mappings}: Deriving surface distinctions from  identical inputs}
+\begin{itemize}
+\item{suppletion}
+\item{different concatenations: Hungarian {\it haj\'{o}-k} `boats' {\it haj\'{o}-i-m} `my boats' }
+\end{itemize}
+\item[b.]{{\it Many-to-one-mappings}: Demonstrating that identical surface strings can correspond to   underlyingly distinct featural representations, or alternatively, demonstrating that the inputs are actually identical---the problem of {\bf morphological homophony}}
+\end{itemize}
+
+
+
+
+\clearpage
+\begin{example}\label{heim}Morphological relationships in Old Icelandic
+
+
+\begin{tabular}{|l| l l|c|l| l| l|} \cline{1-3} \cline{5-7}
+\multicolumn{2}{|r}{\sc sing}&{\sc plur}&\hspace{1in}&\multicolumn{2}{|r}{\sc sing}&{\sc plur}  \\ \cline{2-3} \cline{6-7}
+{\sc nom}&{\it heimr}&{\it heimar}&\hspace{1in}& {\sc nom}&{\it skip}&{{\it skip}}\\ 
+{\sc gen}&{\it heims}&{\it heima} &\hspace{1in}&{\sc gen}&{\it skips}&{\it skipa} \\ 
+{\sc dat}&{\it heimi}&{\it heimum}&\hspace{1in}&{\sc dat}&{\it skipi}&{\it skipum} \\ 
+{\sc acc}&{\it heim}&{\it heima}&\hspace{1in}&{\sc acc}&{\it skip}&{\it skip} \\ \cline{1-3} \cline{5-7}
+\end{tabular}
+\end{example}
+
+
+
+
+\noindent Is there one {\it skip} or two (or four)? Does the {\sc string} {\it skip} correspond to one {\sc vague} representation, or is it {\sc ambiguous} and thus correspond to two representations that happen to be homophonous?
+
+
+
+
+\section{Two logical extremes}
+
+
+\begin{example}\label{radvag}Radical underspecification/vagueness: \\ {\it you}-[{\sc 2 sg nom}], {\it you}-[{\sc 2 du nom}], {\it you}-[{\sc 2 pl nom}], {\it you}-[{\sc 2 sg obj}], {\it you}-[{\sc 2 du obj}], {\it you}-[{\sc 2 pl obj}], {\it etc.}  $\Rightarrow$ {\it you}-[2]
+
+There is no homophony (other than that which can be derived phonologically). In a given language, a single underlying phonological representation (input to the phonology, UR) $\Sigma$ corresponds to a single morphosyntactic feature description which subsumes the description of all the morphosyntactic environments in which  $\Sigma$ can appear. 
+\end{example}
+
+\begin{example}\label{radamb}Radical homophony/ambiguity: \\ {\it you}-[{\sc 2 sg nom}]$\neq${\it you}-[{\sc 2 du nom}]$\neq${\it you}-[{\sc 2 pl nom}]$\neq$  {\it you}-[{\sc 2 sg obj}]$\neq${\it you}-[{\sc 2 du obj}]$\neq${\it you}-[{\sc 2 pl obj}]
+
+
+If there are $n$ morphosyntactic contexts in which a string $\Sigma$ appears which can be distinguished using the set of all morphosyntactic features provided by Universal Grammar, then $\Sigma$ is $n$-ways ambiguous; that is, $\Sigma$ corresponds to $n$ (listed or derived) lexical items. 
+\end{example}
+
+
+
+
+
+\section{Arguments for the necessity of (interesting) homophony}
+
+
+
+
+
+\begin{example}{First argument for ambiguity: Blocking of productive morphology}
+
+ There {\it must} be a lexical item `{\it sheep} [{\sc plural}]' in order to block the productive process of plural formation from generating *{\it sheeps}.
+\end{example}
+
+
+
+
+
+\begin{example}{Second argument: identical subsumption structures in  Old French  `wall'}
+
+\begin{tabular}{|l| l l|} \hline 
+\multicolumn{2}{|r}{{\sc nom}}&{{\sc obl}}  \\ \cline{2-3} 
+{{\sc sing}}&{murs}&{mur} \\ 
+{{\sc plur}}&{mur}&{murs}  \\ \hline
+\end{tabular}
+
+\end{example}
+
+
+
+
+
+
+\begin{example}{Third argument for ambiguity: \\ {\it fly:flew vs. fly:flied: ring:rang vs. ring:ringed, etc.}}
+\end{example}
+
+
+
+
+
+
+
+\subsection{A more complex fourth argument: `Lexical splits' (Toivonen, 2000)}
+
+
+
+\begin{example}
+
+\begin{itemize} 
+
+\item[(a)] \gll Pekka n\"{a}kee h\"{a}nen yst\"{a}v\"{a}-ns\"{a}.
+ P. sees his/her friend-3Px
+  \glt `Pekka sees his/her friend.' 
+  \glend
+
+\item[(b)] \gll *Pekka n\"{a}kee h\"{a}nen yst\"{a}v\"{a}n.
+ P. sees his/her friend.{\sc acc} 
+ \glt `Pekka sees his/her friend.'
+\glend
+ 
+
+ \item[(c)] \gll Pekka n\"{a}kee pojan yst\"{a}v\"{a}n. 
+P. sees boy.{\sc gen} friend.{\sc acc}
+ \glt `P. sees the boy's friend.'
+\glend 
+
+\item[(d)]
+\gll *Pekka n\"{a}kee pojan yst\"{a}v\"{a}-ns\"{a}.
+ P. sees boy.{\sc gen} friend-3Px
+ \gln 
+\glend 
+  
+
+ \item[(e)] 
+\gll Min\"{a} annan koira-lle sen ruokaa.
+ I give dog.{\sc all} it.{\sc gen} food 
+ \glt `I give the dog its food.' 
+ \glend
+  \item[(f)] 
+  \gll *Min\"{a} annan koira-lle sen ruokaa-nsa. 
+I give dog.{\sc all} it.{\sc gen} food-3Px
+ \gln \glend \end{itemize} \end{example}
+
+
+
+\begin{example}\label{anaph}
+\begin{itemize}
+\item[(a)]
+\gll H\"{a}n n\"{a}kee yst\"{a}v\"{a}-ns\"{a}.
+He sees friend-3Px
+  \glt `He$_i$ sees his$_i$ friend.' \glend 
+\item[(b)]
+\gll Poika n\"{a}kee yst\"{a}v\"{a}-ns\"{a}. 
+boy sees friend-3Px
+ \glt `The boy$_i$ sees his$_i$ friend.' \glend
+\item[(c)]\gll Se heiluttaa h\"{a}nt\"{a}\"{a}-ns\"{a}. 
+it wiggles tail-3Px
+ \glt `It$_i$ wiggles its$_i$ tail.' \glend
+\end{itemize} 
+\end{example}
+
+
+
+
+\begin{example}\label{agr}Features of agreement marker -{\it nsa/ns\"{a}}
+
+{$\left[ \begin{array}{c}
+                 \mbox{{\sc human}} \\ 
+                \mbox{3rd} \\
+                \mbox{\sc pronoun agreement}
+                \end{array}
+                \right]$}
+\end{example}
+
+
+
+\begin{example}\label{prsf}Features of pronominal suffix  -{\it nsa/ns\"{a}}
+
+{$\left[ \begin{array}{c}
+                 \mbox{{\sc pred}} \\
+                 \mbox{{\sc subject antecedent}} \\ 
+                \mbox{3rd} \\
+                \end{array}
+                \right]$}
+\end{example}
+
+\noindent The surface form -{\it nsa/ns\"{a}} is thus ambiguous. It is possible to list, say, a disjunctive statement of where the putative `vocabulary item' -{\it nsa/ns\"{a}}  is inserted. However, this is equivalent to listing two separate items.               
+
+
+
+
+
+
+\begin{example}We must conclude that there is at least some homophony that is more interesting than {\it knight vs. night} and {\it vagn}-{\sc nom} {\it vs.} {\it vagn}-{\sc acc}. In other words we can reject Radical Vagueness.
+\end{example}
+
+
+
+
+
+
+\section{Solving the {\it Linguist's Problem} using external evidence}
+
+
+\begin{example}Rejecting (Almost) Radical Ambiguity
+\end{example}
+\noindent The errors that SLA learners make may reflect aspects of the L$_1$. Consider the following (impressionistic) observations: speakers of language like Hungarian, which do not distinguish gender in third person pronouns make many errors in using English {\it he/she}, whereas English speakers do not appear to have a problem learning {\it not} to be able to distinguish the genders. If Hungarian  {\it \textipa{ \textdoublevbaraccent{o}}} corresponded to two separate representations, one [{\sc 3 sg masc]} and another [{\sc 3 sg fem]}, we might expect the mapping to the English system to be easier than it apparently is. Similarly, English speakers have a hard time learning to make the {\sc dual} / {\sc plural} contrast, so this may indicate that this distinction has been collapsed in English grammars. In other words, we can reject the idea---(Almost) Radical Ambiguity---that no collapse of initial full specification occurs.
+
+
+\begin{example} Rejecting Maximal Collapse---(close to Radical Vagueness) the idea that whatever can be collapsed is
+\end{example}
+\noindent English speakers have no problem learning distinctions like the French {\it tu / vous} contrast. This is evidence that distinctions that are made anywhere in the language, such as {\sc singular} {\it vs.} {\sc plural}, are maintained in representations. This is incompatible with the proposal of maximal collapse---no string other than {\it you} occurs in the context of [2nd person], so why not just posit one {\it you}?
+
+
+
+
+
+\end{document}
+
+
+
