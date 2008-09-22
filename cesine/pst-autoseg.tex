@@ -1,0 +1,257 @@
+%% John Frampton, 12 March 2004
+%% if this were a paper, it would be called a draft
+%% PLEASE - bug reports (and questions) to frampton@neu.edu
+
+\csname autosegLoaded\endcsname
+\let\autosegLoaded\endinput
+\ifx\PSTricksLoaded\endinput \else \input pstricks \fi\relax
+\edef\TheAtCode{\the\catcode`\@}
+\catcode`\@=11
+
+%% don't define dimension registers if they are already defined
+\def\@newdimensionif#1{\expandafter\ifx\csname #1\endcsname\relax
+   \expandafter\@skipover\csname #1\endcsname \fi}
+\def\@skipover{\csname newdimen\endcsname}
+\@newdimensionif{jf@dima}
+\@newdimensionif{jf@dimb}
+\@newdimensionif{jf@dimc}
+\@newdimensionif{jf@dimd}
+\@newdimensionif{jf@dimg}
+\@newdimensionif{jf@dimh}
+\@newdimensionif{dimpuba}
+\@newdimensionif{dimpubb}
+\@newdimensionif{dimpubc}
+\@newdimensionif{dimpubd}
+%
+\newif\if@@recalc
+
+\@@recalcfalse
+
+\def\psset@tsB#1{\aseg@reset\aseg@tsB{#1}}
+\def\psset@tstopgap#1{\aseg@reset\aseg@tstopgap{#1}}
+\def\psset@tsbotgap#1{\aseg@reset\aseg@tsbotgap{#1}}
+\def\psset@syconngap#1{\aseg@reset\aseg@syconngap{#1}}
+\def\psset@sytopgap#1{\aseg@reset\aseg@sytopgap{#1}}
+\def\psset@sybotgap#1{\aseg@reset\aseg@sybotgap{#1}}
+\def\psset@phconngap#1{\aseg@reset\aseg@phconngap{#1}}
+\def\psset@phtopgap#1{\aseg@reset\aseg@phtopgap{#1}}
+\def\psset@phbotgap#1{\aseg@reset\aseg@phbotgap{#1}}
+\def\psset@xgap#1{\aseg@reset\aseg@xgap{#1}
+   \asegxgap=\aseg@xgap \psunit=\asegxgap
+   \psxunit=\psunit \psyunit=\psunit}
+\def\psset@juncpinch#1{\aseg@reset\aseg@juncpinch{#1}}
+\def\psset@phantomjunctures#1{\def\temp{#1}%
+   \ifx\temp\pst@true \phantomjuncturestrue
+      \else \phantomjuncturesfalse \fi}
+\newif\ifphantomjunctures
+\def\pst@true{true}
+\def\psset@everyphoneme#1{\everyphoneme={#1}}
+\def\psset@everyts#1{\everyts={#1}}
+\def\psset@everysyllable#1{\everysyllable={#1}}
+
+\newif\if@@increment
+\def\@test#1#2\@empty{\ifx#1!\@@incrementtrue\else
+   \@@incrementfalse\fi}
+\def\aseg@reset#1#2{\@test#2\@empty
+   \if@@increment \pst@dima=#1%
+   \pst@dimb\@gobble#2\advance\pst@dima by \pst@dimb
+   \edef#1{\the\pst@dima}\else \edef#1{#2}\fi
+   \@@recalctrue\ignorespaces}
+\def\psset#1{\@psset#1,\@nil\every@psset\ignorespaces}
+\def\every@psset{\if@@recalc \do@@recalc \fi}
+
+\newdimen\asegxgap
+\newdimen\asegsyt
+\newdimen\asegsyB
+\newdimen\asegsyb
+\newdimen\asegtst
+\newdimen\asegtsB
+\newdimen\asegtsb
+\newdimen\asegpht
+\newdimen\asegphB
+\newdimen\asegphb
+
+\def\do@@recalc{\asegxgap=\aseg@xgap
+   \pssetlength\asegtsB\aseg@tsB
+   \asegtst=\asegtsB \psaddtolength\asegtst\aseg@tstopgap
+   \asegsyb=\asegtst \psaddtolength\asegsyb\aseg@syconngap
+   \asegsyB=\asegsyb \psaddtolength\asegsyB\aseg@sybotgap
+   \asegsyt=\asegsyB \psaddtolength\asegsyt\aseg@sytopgap
+   \asegtsb=\asegtsB \psaddtolength\asegtsb{-\aseg@tsbotgap}
+   \asegpht=\asegtsb \psaddtolength\asegpht{-\aseg@phconngap}
+   \asegphB=\asegpht \psaddtolength\asegphB{-\aseg@phtopgap}
+   \asegphb=\asegphB \psaddtolength\asegphb{-\aseg@phbotgap}
+   \@@recalcfalse}
+
+\newdimen\xpos
+\newtoks\everyphoneme
+\newtoks\everyts
+\def\normalslots{\everyts={$\times$}}
+\normalslots
+\newtoks\everysyllable
+\def\normalsyllables{\everysyllable={$\sigma$}}
+\normalsyllables
+%%%% placing material and association lines
+\def\dimput(#1,#2)#3{\setbox0=\hbox{#3}%
+   \pssetlength\jf@dimg{#1}
+   \advance\jf@dimg by .5\wd0
+      \ifdim\jf@dimg>\aseg@maxr \aseg@maxr=\jf@dimg\fi
+   \advance\jf@dimg by -\wd0
+      \ifdim\jf@dimg<\aseg@maxl \aseg@maxl=\jf@dimg\fi
+   \pssetlength\jf@dimg{#2}\advance\jf@dimg by \ht0
+      \ifdim\jf@dimg>\aseg@maxu \aseg@maxu=\jf@dimg\fi
+   \pssetlength\jf@dimg{#2}\advance\jf@dimg by -\dp0
+      \ifdim\jf@dimg<\aseg@maxd \aseg@maxd=\jf@dimg\fi
+   \rput[B](#1,#2){\unhbox0}}
+\def\putph#1{\dimput(\xpos,\asegphB){\the\everyphoneme #1}
+   \psline[style=assoc](\xpos,\asegpht)(\xpos,\asegtsb)
+   \dimput(\xpos,\asegtsB){\the\everyts}
+   \advance\xpos by\asegxgap \ignorespaces}
+\def\putgem#1{\jf@dima=\xpos \advance\jf@dima by .5\asegxgap
+   \dimput(\jf@dima,\asegphB){\the\everyphoneme #1}
+   \dimput(\xpos,\asegtsB){\the\everyts}
+   \psline[style=assoc](\xpos,\asegtsb)(\jf@dima,\asegpht)
+   \advance\xpos by \asegxgap
+   \dimput(\xpos,\asegtsB){\the\everyts}
+   \psline[style=assoc](\xpos,\asegtsb)(\jf@dima,\asegpht)
+   \advance\xpos by \asegxgap \ignorespaces}
+\def\putphoff#1#2{\jf@dima=\xpos
+   \advance\jf@dima by #2\asegxgap
+   \dimput(\xpos,\asegtsB){\the\everyts}
+   \dimput(\jf@dima,\asegphB){\the\everyphoneme #1}
+   \psline[style=assoc](\xpos,\asegtsb)(\jf@dima,\asegpht)
+   \advance\xpos by \asegxgap \ignorespaces}
+%% no timing slot representations
+\def\notsputph#1{\dimput(\xpos,\asegtsB){\the\everyphoneme #1}
+   \advance\xpos by\asegxgap \ignorespaces}
+\def\notsputgem#1{\putph{#1}\putph{#1}}
+\def\notsenv{\let\putph=\notsputph \let\putgem=\notsputgem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% \asr ... \endasr
+\newdimen\aseg@maxr
+\newdimen\aseg@maxl
+\newdimen\aseg@maxu
+\newdimen\aseg@maxd
+\newbox\asr@box
+\def\asr{\setbox\asr@box=\hbox\bgroup
+   \aseg@maxr=-\maxdimen \aseg@maxl=\maxdimen
+   \aseg@maxu=-\maxdimen \aseg@maxd=\maxdimen
+   \xpos=0pt
+   \futurelet\temp\@asrA}
+\def\endasr{\xdef\@Maxr{\the\aseg@maxr}\xdef\@Maxl{\the\aseg@maxl}%
+   \xdef\@Maxu{\the\aseg@maxu}\xdef\@Maxd{\the\aseg@maxd}\egroup
+   \jf@dima=\@Maxl
+   \ifdim\jf@dima=\maxdimen  \box\asr@box  \else
+   \ht\asr@box=\@Maxu  \dp\asr@box=-\@Maxd
+   \hbox{\kern-\@Maxl\box\asr@box\kern\@Maxr}\fi}
+\def\@asrA{\ifx\temp[\let\temp=\@asrB \else
+   \let\temp=\@asrC \fi \temp}
+\def\@asrB[#1]{\psset{#1}\@asrC}
+\def\@asrC#1{%
+   \ifx#1*\let\next=\ignorespaces \else
+   \ifx#1^\let\next=\@asrEval \else
+   \ifx#1"\let\next=\@asrLiteral \else
+   \ifx#1\endasr\let\next=\endasr \else
+   \ifcat\noexpand#1\noexpand\asr #1\let\next=\@asrC \else
+      \def\@holdchar{#1}\let\next=\@asrAfterchar
+      \fi\fi\fi\fi\fi \next}
+\def\@asrEval#1{#1\@asrC}
+\def\@asrLiteral#1{\def\@holdchar{#1}\@asrAfterchar}
+\def\@asrAfterchar{\futurelet\temp\@gemtest}
+\def\@gemtest{\ifx\temp:\putgem{\@holdchar}\let\next=\@gobbleresume
+   \else\putph{\@holdchar}\let\next=\@asrC\fi\next}
+\def\@gobbleresume#1{\@asrC}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Syllables
+\def\varsyl{\futurelet\temp\v@rsyl}
+\def\v@rsyl{\ifx\temp[\let\temp=\v@rsylA
+   \else \let\temp=\v@rsylB
+      \edef\sy@@able{\the\everysyllable}\fi \temp}
+\def\v@rsylA[#1]{\def\sy@@able{#1}\v@rsylB}
+\def\v@rsylB#1{\jf@dima=\xpos
+   \advance\jf@dima by #1\asegxgap
+   \dimput(\jf@dima,\asegsyB){\sy@@able}
+   \v@rsylC}
+\def\v@rsylC#1{\ifx#1)\let\next=\ignorespaces \else
+   \pst@dimb=\xpos \advance\pst@dimb by #1\asegxgap
+   \psline[style=assoc](\jf@dima,\asegsyb)
+      (\pst@dimb,\asegtst)
+   \let\next=\v@rsylC \fi \next}
+\def\1{\varsyl00)}
+\def\2{\varsyl{.5}01)}
+\def\3{\varsyl1012)}
+\def\4{\varsyl{1.5}0123)}
+\def\monosyls{\everysyllable={$\sigma^\mu\mskip-4mu$}}
+\def\bisyls{\everysyllable={$\sigma^{\mu\mu}\mskip-12mu$}}
+\def\normalsyls{\everysyllable={$\sigma$}}
+\normalsyls
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  "morftree" macros: \firstnode,\merge,\labelmerge
+%
+\def\firstnode(#1,#2)#3{%
+   \pssetxlength\jf@dima{#1}
+   \edef\jf@bullx{\the\jf@dima}%
+   \edef\jf@oldrootx{\the\jf@dima}%
+   \pssetxlength\jf@dimb{#2}
+   \jf@dimc=\jf@dimb
+   \advance\jf@dimb by \asegsyt
+   \edef\jf@oldrooty{\the\jf@dimb}%
+   \advance\jf@dimc by \asegsyb
+   \edef\jf@bully{\the\jf@dimc}%
+   \pst@divide\psyunit\psxunit\jf@yoverx
+   \pst@divide\psxunit\psyunit\jf@xovery
+   \jf@treeput(#1,#2){#3}\ignorespaces}
+\def\merge(#1,#2)#3{\jf@treeput(#1,#2){#3}
+   \pssetxlength\jf@dima{#1}
+   \edef\jf@bullx{\the\jf@dima}%
+   \jf@dimc=\jf@dima \advance\jf@dimc by \jf@oldrootx
+   \jf@dimg=.5\jf@dimc   % .5(x1+x2)
+   \jf@dimc=\jf@dima \advance\jf@dimc by -\jf@oldrootx
+   \jf@dimc=.5\jf@dimc   % .5(x2-x1)
+   \ifdim\jf@dima<\jf@oldrootx \jf@dimc=-\jf@dimc\fi
+   \jf@dimh=\jf@yoverx\jf@dimc
+   \pssetylength\jf@dimb{#2}
+   \jf@dimc=\jf@dimb
+   \advance\jf@dimc by \asegsyb
+   \edef\jf@bully{\the\jf@dimc}%
+   \advance\jf@dimb by \asegsyt
+   \jf@dimc=\jf@dimb  \advance\jf@dimc by \jf@oldrooty\relax
+   \jf@dimc=.5\jf@dimc   % .5(y2+y1)
+   \advance\jf@dimh by \jf@dimc
+   \jf@dimc=\jf@dimb
+   \advance\jf@dimc by -\jf@oldrooty\relax
+   \jf@dimc=.5\jf@dimc  % .5(y2-y1)
+   \ifdim\jf@dima<\jf@oldrootx \jf@dimc=-\jf@dimc\fi
+   \advance\jf@dimg by \jf@xovery\jf@dimc
+   \psline(\jf@dima,\jf@dimb)(\jf@dimg,\jf@dimh)
+      (\jf@oldrootx,\jf@oldrooty)
+   \edef\jf@oldrootx{\the\jf@dimg}%
+   \edef\jf@oldrooty{\the\jf@dimh}%
+   \dimput(\jf@dimg,\jf@dimh){}
+   \ignorespaces}
+\def\jf@treeput(#1,#2)#3{\pssetylength\jf@dima{#2}
+   \advance\jf@dima by \asegsyB
+   \dimput(#1,\jf@dima){#3}\ignorespaces}
+\def\labelmerge#1#2(#3,#4){\pssetylength\jf@dima{#4}
+   \advance\jf@dima by \asegsyb
+   \pnode(#3,\jf@dima){#1}
+   \merge(#3,#4)}
+\def\massoc#1(#2)#3{\pccurve#1(#2,\asegtst)(#3)\ignorespaces}
+\def\ssroot#1{$\rm\scriptstyle[\![#1]\!]$}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% some standard styles
+\newpsstyle{assoc}{linestyle=solid,linewidth=.4pt}
+\newpsstyle{medsyls}{tsB=0pt,xgap=2.6ex,
+   tstopgap=1.8ex,tsbotgap=.7ex,
+   syconngap=1ex,sybotgap=.4ex,sytopgap=1ex,
+   phconngap=1.8ex,phtopgap=2ex,phbotgap=.4ex,juncpinch=.40ex,
+   phantomjunctures=false}
+\newpsstyle{morf}{xgap=18pt,tsbotgap=.7ex,phconngap=4.5pt,
+   phtopgap=2ex,phbotgap=.4ex,tstopgap=1.8ex,%
+   syconngap=11pt,sybotgap=3.5pt,sytopgap=10pt,%
+   juncpinch=.40ex,style=assoc,angleA=90,angleB=-90,ncurv=.6}
+\def\morphmode{\psset{tsB=0}\psset{tsB=-\the\asegsyB}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\psset{style=medsyls}
+\catcode`\@=\TheAtCode
+

@@ -1,0 +1,750 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	This File		: clv1.sty
+%	Version		: V1.0
+%
+%	Remarks		: The original file was cl.sty see below for more on this
+%
+%       Note		: Changes are marked as %KG in this file with information
+%
+%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% CL.STY: Computational Linguistics Latex style file.
+% (c) copyright 1991 The MIT Press
+% The MIT Press, 55 Hayward St., Cambridge, MA 02142
+%
+% Macros prepared by Archetype Publishing Inc., 
+% P.O. Box 6567, Champaign IL 61821.
+% Call Archetype at 217-359-8178 if you have questions 
+% or problems using these macros.
+%
+%* Modifications by Stuart M. Shieber, 1994
+%* (All SMS modifications marked with %* in the line.)
+%*
+%* Please see the documentation cum sample file cl-doc.tex for usage.
+%
+% In addition to this file, the ACL journal uses the public
+% domain file palatino.sty, since the journal is set in
+% palatino.  You can omit this file, but then the usual computer
+% modern fonts (cm fonts) will be used, however, with different line
+% layout and page breaks than the final paper version.
+% Of course, your printer must have palatino fonts in it (like
+% most Apple printers, QMS series, etc., for palatino to be
+% available.)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% OPTIONS Added on 07-Feb-2005
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{clv1}[2005/02/07 v1.0 LaTeX package for Computational Linguistics]
+%
+\newif\ifmanuscript
+\DeclareOption{manuscript}{\AtBeginDocument{\setlength{\footnotesep}{24pt}\setlength{\baselineskip}{2\baselineskip}\global\manuscripttrue}}  % double-spacing
+\ProcessOptions\relax
+%
+\@twosidetrue
+\usepackage{palatino}
+\usepackage{mathpazo}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% End OPTIONS
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% PAGE LAYOUT
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\parindent 1.5pc
+\textwidth 32pc         % Width of text line.
+\textheight 51pc
+\columnwidth 15pc
+\footskip 51pt
+\evensidemargin -15pt
+\oddsidemargin \evensidemargin
+\def\leftm{5.5pc}
+
+\textfloatsep 24pt plus 18pt minus 0pt
+\dbltextfloatsep 24pt plus 2pt minus 4pt
+
+\topmargin -2pc
+\headheight 11pt
+\headsep 22pt
+% \footheight 31pt 
+\parskip 0pt
+\advance\footskip-14pt
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% FONT INFORMATION
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\def\@normalsize{\@setsize\normalsize{12pt}\xpt\@xpt
+\abovedisplayskip 12pt plus2pt minus5pt\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus3pt\belowdisplayshortskip 6pt plus3pt minus3pt}
+\def\bi{\@setsize\bi{11pt}\ixpt\@ixpt
+\abovedisplayskip 8.5pt plus 3pt minus 4pt\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus2pt\belowdisplayshortskip 4pt plus2pt minus 2pt
+\def\@listi{\topsep 4pt plus 2pt minus 2pt\parsep 2pt plus 1pt minus 1pt
+\itemsep \parsep}}
+\def\manfont{\@setsize\bit{14pt}\xiipt\@xiipt}
+\def\bit{\@setsize\bit{11pt}\xpt\@xpt}
+\def\LARGE{\@setsize\LARGE{20pt}\xviipt\@xviipt}
+\def\large{\@setsize\large{13pt}\xiipt\@xiipt}
+\def\affilfont{\@setsize\affilfont{13pt}\xpt\@xpt}
+\def\small{\@setsize\small{10pt}\ixpt\@ixpt
+\abovedisplayskip 8.5pt plus 3pt minus 4pt\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus2pt\belowdisplayshortskip 4pt plus2pt minus 2pt
+\def\@listi{\topsep 4pt plus 2pt minus 2pt\parsep 2pt plus 1pt minus 1pt
+\itemsep \parsep}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% TITLE PAGE
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%* Make volume, number, and running title and author information
+%* declared in a uniform manner.
+%
+\def\issue #1#2#3{\gdef\Vol{#1}\gdef\Num{#2}\gdef\Year{#3}}
+\def\Rtitle{}\gdef\Rauthor{}
+\def\runningtitle#1{\gdef\Rtitle{#1}}
+\def\runningauthor#1{\gdef\Rauthor{#1}}
+\def\affil#1{{\affilfont #1}}
+%%
+\def\@pubinfo{}
+\def\pubinfo#1{\gdef\@pubinfo{#1}}
+%
+\def\@reviewer{}
+\def\reviewer#1{\gdef\@reviewer{#1}}
+%
+\def\endbody{\ifx\@reviewer\@empty\else\unskip---{\itshape\@reviewer}\fi}%\par\addvspace{10pt}}
+%
+\def\@biography{}
+\def\biography#1{\gdef\@biography{#1}}
+%
+\def\@source{}
+\def\source#1{\gdef\@source{#1}}
+%
+%
+%* Default the footmark on the first page to an appropriate copyright
+%* notice.
+
+\newcommand{\footmark}{\copyright\ \Year\ Association for Computational Linguistics}
+
+\def\@maketitle{\pagestyle{empty}\cleardoublepage%
+\pagestyle{headings}%
+\markboth{\Rauthor}{\Rtitle}%
+% \null
+\vskip -18pt
+ {\LARGE\noindent\bf \parbox[t]{28pc}{\raggedright\@title} \par} \vskip 1.5em\vskip 14pt {\large \lineskip .5em
+\def\arraystretch{.5}\noindent\begin{tabular}[t]{@{}p{15pc}@{\hspace{2pc}}p{15pc}@{}}\@author 
+ \end{tabular}\par} 
+ \par
+ \vskip 1.5em\vskip 14pt} 
+
+\def\maketitle{\par
+ \begingroup
+\setcounter{section}{0}
+\setcounter{subsection}{0}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+\setcounter{footnote}{0}
+\setcounter{example}{0}
+   \def\thefootnote{\fnsymbol{footnote}}
+\def\domkfnmark{\llap{\hbox to 1.4em{\hss{$\@thefnmark$\ }}}}
+\long\def\@makefntext##1{\ifmanuscript\manfont\setlength{\baselineskip}{2\baselineskip}\fi\raggedright\leftskip=1.4em\parindent 1em\noindent
+ \domkfnmark##1}
+ \if@twocolumn 
+ \twocolumn[\@maketitle] 
+ \else \newpage
+ \global\@topnum\z@ \@maketitle \fi\thispagestyle{tplain}\@thanks
+   \ifx\@historydates\@empty\else
+      \let\domkfnmark\relax\@footnotetext{\@historydates}
+   \fi
+ \endgroup
+ \setcounter{footnote}{0}
+% \let\maketitle\relax
+% \let\@maketitle\relax
+ \gdef\@thanks{}\gdef\@author{}\gdef\@title{}\let\thanks\relax}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% PAGE STYLES
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\def\ps@plain{\let\@mkboth\markboth
+  \def\@oddfoot{\hfill\thepage}
+  \def\@evenfoot{\thepage\hfill}
+  \def\@evenhead{}
+  \def\@oddhead{}
+  \def\sectionmark##1{}
+  \def\subsectionmark##1{}}
+
+\def\ps@tplain{\let\@mkboth\markboth
+  \def\@oddfoot{\footnotesize\footmark\hfill}
+  \def\@evenfoot{\footnotesize\hfill\footmark}
+  \def\@evenhead{}
+  \def\@oddhead{}
+  \def\sectionmark##1{}
+  \def\subsectionmark##1{}}
+
+\def\ps@headings{\let\@mkboth\markboth
+  \def\@oddfoot{\hfill\thepage}
+  \def\@evenfoot{\thepage\hfill}
+  \def\@evenhead{{\small Computational Linguistics}\hfil\hbox to 15pc{{\small Volume \Vol, Number \Num}\hfill}}
+  \def\@oddhead{\hbox{}{\small\leftmark}\hfil\hbox to 15pc{{\small\rightmark}\hfill}}
+  \def\sectionmark##1{}
+  \def\subsectionmark##1{}}
+%
+\let\ps@myheadings\ps@headings
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Section commands
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \@startsection {NAME}{LEVEL}{INDENT}{BEFORESKIP}{AFTERSKIP}{STYLE} 
+%            optional * [ALTHEADING]{HEADING}
+%    Generic command to start a section.  
+%    NAME       : e.g., 'subsection'
+%    LEVEL      : a number, denoting depth of section -- e.g., chapter=1,
+%                 section = 2, etc.
+%    INDENT     : Indentation of heading from left margin
+%    BEFORESKIP : Absolute value = skip to leave above the heading.  
+%                 If negative, then paragraph indent of text following 
+%                 heading is suppressed.
+%    AFTERSKIP  : if positive, then skip to leave below heading, else 
+%                 negative of skip to leave to right of run-in heading.
+%    STYLE      : commands to set style
+\def\@sect#1#2#3#4#5#6[#7]#8{\ifnum #2>\c@secnumdepth
+     \def\@svsec{}\else 
+     \refstepcounter{#1}\edef\@svsec{\csname the#1\endcsname\hskip 1em }\fi
+     \@tempskipa #5\relax
+      \ifdim \@tempskipa>\z@ 
+        \begingroup #6\relax
+          \@hangfrom{\hskip #3\relax\@svsec}{\interlinepenalty \@M #8\@afterhead\par}
+        \endgroup
+       \csname #1mark\endcsname{#7}\addcontentsline
+         {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+                      \protect\numberline{\csname the#1\endcsname}\fi
+                    #7}\else
+        \def\@svsechd{#6\hskip #3\@svsec #8\@afterhead\csname #1mark\endcsname
+                      {#7}\addcontentsline
+                           {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+                             \protect\numberline{\csname the#1\endcsname}\fi
+                       #7}}\fi
+     \@xsect{#5}}
+\def\@ssect#1#2#3#4#5{\@tempskipa #3\relax
+   \ifdim \@tempskipa>\z@
+     \begingroup #4\@hangfrom{\hskip #1}{\interlinepenalty \@M #5\@afterhead\par}\endgroup
+   \else \def\@svsechd{#4\hskip #1\relax #5\@afterhead}\fi
+    \@xsect{#3}}
+\setcounter{secnumdepth}{4}
+
+\def\section{\def\@afterhead{}\@startsection {section}{1}{0pt}{-12pt plus -1pt minus 0pt}
+{12pt plus 0pt minus 0pt}{\def\@svsec{\thesection.\ }\bf}}
+\def\subsection{\def\@afterhead{}\@startsection{subsection}{2}{0pt}{-12pt plus -1pt minus 0pt}
+{.0001pt}{\def\@svsec{\thesubsection\ }\bf}}
+\def\subsubsection{\def\@afterhead{.}\@startsection{subsubsection}{3}{0pt}{-12pt plus -1pt minus 0pt}
+{-.5em}{\def\@svsec{\thesubsubsection\ }\bf}}
+\def\paragraph{\def\@afterhead{.}\@startsection{paragraph}{4}{0pt}{-12pt plus -1pt minus 0pt}
+{-.5em plus .2ex}{\def\@svsec{}\em}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Lists
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\leftmargini 3pc
+\leftmarginii 2em
+\leftmarginiii 2em
+\leftmarginiv 1em
+\leftmarginv 1em
+\leftmarginvi 1em
+
+\def\@listi{\rightmargin=1.5pc\topsep 12pt plus 2pt minus 2pt\parsep 0pt plus 1pt minus 1pt
+   \itemsep 6pt\leftmargin\leftmargini\labelsep .5pc\labelwidth 2.5pc}
+\def\@listii{\rightmargin=1.5pc\leftmargin\leftmarginii\topsep 6pt plus 2pt minus 1pt\parsep 0pt
+plus 1pt minus 1pt\itemsep 0pt\labelsep 1pc} 
+\def\@listiii{\rightmargin=1.5pc\leftmargin\leftmarginii\topsep 6pt plus 2pt minus 1pt\parsep 0pt plus 1pt minus 1pt\itemsep
+0pt\labelsep 1pc}
+%
+% Numbered lists
+%
+\def\enumerate{\par\raggedright\ifnum \@enumdepth >3 \@toodeep\else
+      \advance\@enumdepth \@ne 
+      \edef\@enumctr{enum\romannumeral\the\@enumdepth}\list
+      {\csname label\@enumctr\endcsname}{\usecounter
+        {\@enumctr}\def\makelabel##1{\hskip1pc\rlap{##1}}}\fi}%KG%changed 1.5pc to 1pc
+
+\def\endenumerate{\par\endlist}
+%
+% Itemized lists
+%
+\def\itemize{\par\raggedright\ifnum \@itemdepth >3 \@toodeep\else \advance\@itemdepth \@ne
+\edef\@itemitem{labelitem\romannumeral\the\@itemdepth}%
+\list{\csname\@itemitem\endcsname}{\def\makelabel##1{\hskip 1pc\rlap{##1}\hfil}}\fi}%KG%changed 1.5pc to 1pc
+
+\def\enditemize{\par\endlist}
+\newenvironment{wf}{\vspace{14pt}\parindent=0pt\everypar{\hangindent=1.5pc\hangafter=1}\par\small\sf}{\par\vspace{12pt}}
+%
+% Unnumbered lists: \begin and \end{unenumerate}
+%
+\newenvironment{unenumerate}{\def\labelitemi{}\def\labelitemii{}\def\labelitemiii{}\leftmargini=1.5pc\begin{itemize}}{\end{itemize}}
+%
+% Definition environment
+%
+\newenvironment{definition}{\par\vspace{\baselineskip}\noindent{\bf Definition}
+  \everypar{\hangindent=1.6pc\hangafter=1}\par\parindent=0pt}{\vspace{12pt}\par}
+\newenvironment{examples}{\par\begin{enumerate}}{\end{enumerate}}
+\newenvironment{dialog}{\bgroup\parindent=0pt\everypar{\hangindent=1.5pc\hangafter=1}
+  \vspace{\baselineskip}\par}{\egroup\vspace{\baselineskip}}
+%
+% Extract environment: Use \begin and \end{ext} instead of "quote" or 
+%                      "quotation" environment.
+%
+\newenvironment{ext}{\par\raggedright\hsize=29pc\leftskip=1.5pc\small\vspace{14pt}}{\par\ifx\@source\@empty\else{\noindent---\@source\par}\fi\gdef\@source{}\vspace{12pt}\par}
+\let\extract\ext
+\let\endextract\endext
+\newenvironment{alg}{\par\sf\bgroup\vspace{\baselineskip}}{\par\egroup\vspace{\baselineskip}}
+%
+% Code environment
+%
+\newenvironment{code}{\par\bgroup\tt\vspace{\baselineskip}}{\egroup\par\vspace{\baselineskip}}
+%
+% Verbatim environment
+%
+\def\verbatim{\topsep=0pt\@verbatim \frenchspacing\@vobeyspaces \@xverbatim}
+%
+% Outline environment
+%
+\newenvironment{outline}{\begin{unenumerate}}{\end{unenumerate}}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Captions
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\def\fnum@figure{\ifmanuscript\manfont\fi\figurename\nobreakspace\thefigure} 
+\def\fnum@table{\ifmanuscript\manfont\fi\tablename\nobreakspace\thetable} 
+% table captions use tcaption; put caption above table
+%
+\long\def\tcaption#1{%
+%  \vskip -\baselineskip
+  \rule{\textwidth}{1pt}\par\vskip 9pt\caption{\ifmanuscript\manfont\setlength{\baselineskip}{2\baselineskip}\fi #1}\par\vskip -3pt\rule{\textwidth}{.5pt}\vskip 3pt
+} 
+\long\def\@makecaption#1#2{
+{\raggedright\small{\leavevmode\noindent\bf#1}\par\noindent\ifmanuscript\manfont\setlength{\baselineskip}{2\baselineskip}\fi #2\par}} 
+\def\table{\small\@float{table}}
+\def\endtable{\end@float\normalsize}
+%
+\def\captionpar{\newline\hspace*{2ex}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Footnotes  
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\skip\footins=10pt              % space added when footnote is present
+
+\def\footnoterule{\kern-3\p@ 
+ \rule[4pt]{4pc}{.5pt}
+ \kern 2.6\p@} 
+
+\long\def\@makefntext#1{\parindent 1em\noindent \hbox to 2.5em{\hss}
+ \hbox to .2em{\hss$^{\@thefnmark}$}#1}
+
+\pagestyle{headings}
+\frenchspacing
+
+\def\footnotesize{\@setsize\footnotesize{9pt}\viiipt\@viiipt
+\abovedisplayskip 6pt plus 2pt minus 4pt\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus 1pt\belowdisplayshortskip 3pt plus 1pt minus 2pt
+\def\@listi{\topsep 3pt plus 1pt minus 1pt\parsep 2pt plus 1pt minus 1pt\itemsep \parsep}}
+%   \footnotesep    : The height of a strut placed at the beginning of
+%                     every footnote.
+\footnotesep 0pt 
+
+%   \skip\footins   : Space between main text and footnotes.  The rule
+%                     separating footnotes from text occurs in this space.
+%                     This space lies above the strut of height \footnotesep 
+%                     which is at the beginning of the first footnote.
+\skip\footins 24pt plus 4pt minus 2pt 
+%   \footnoterule   : Macro to draw the rule separating footnotes from text.
+%                     It is executed right after a \vspace of \skip\footins.
+%                     It should take zero vertical space--i.e., it should to
+%                     a negative skip to compensate for any positive space
+%                     it occupies.  (See PLAIN.TEX.)
+\def\footnoterule{\kern-4\p@
+  \hrule width 15pc \kern 3.6\p@} % the \hrule is .4pt high
+%   \@makefntext{NOTE} :
+%        Must produce the actual footnote, using \@thefnmark as the mark 
+%        of the footnote and NOTE as the text.  It is called when effectively
+%        inside a \parbox, with \hsize = \columnwidth.  For example, it might 
+%        be as simple as 
+%               $^{\@thefnmark}$ NOTE
+\long\def\@makefntext#1{\raggedright\leftskip=1.4em\parindent 1em\noindent 
+ \llap{\hbox to 1.4em{\hss{\@thefnmark\ }}}\ifmanuscript\manfont\setlength{\baselineskip}{2\baselineskip}\fi #1} 
+\def\@makefnmark{{\small$^{\@thefnmark}$}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Bibliography
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%% fullname.sty
+%%%
+%%% Stuart M. Shieber
+%%% Mon Mar 30 17:23:36 EST 1992
+
+%%% Modifications to the citation macros intended to be used with the
+%%% fullname.bst style.
+
+%%% Some material taken from Peter Patel-Schneider's AAAI style for
+%%% use in conjunction with AAAI-named bibliography style.
+%%%
+%%% Citation forms:
+%%%
+%%% Macro	Output format
+%%% -----------	-----------------------------------------
+%%% \cite:	(Dewey, 1988)
+%%% 		(Dewey, 1988, page 15)
+%%% 		(Dewey, 1988; Cheatham, 1987; Howe, 1903)
+%%% \shortcite:	(1988)
+%%%		(1988, page 15)
+%%% \namecite:	Dewey (1988)
+%%%		Dewey (1988, page 15)
+
+% don't box citations, add space between multiple citations, separate with ;
+\def\@citex[#1]#2{\if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+  \def\@citea{}\@cite{\@for\@citeb:=#2\do
+    {\@citea\def\@citea{; }\@ifundefined
+       {b@\@citeb}{{\bf ?}\@warning
+       {Citation `\@citeb' on page \thepage \space undefined}}%
+{\csname b@\@citeb\endcsname}}}{#1}}
+% Allow short (name-less) citations, when used in
+% conjunction with a bibliography style that creates labels like
+%	\citename{<names>, }<year>
+\let\@internalcite\cite
+\def\cite{\def\citename##1{##1, }(\@internalcite}
+\def\shortcite{\def\citename##1{}(\@internalcite}
+\def\namecite{\def\citename##1{##1 (}\@internalcite}
+\def\@biblabel#1{\def\citename##1{##1}[#1]\hfill}
+
+%%% More changes made by SMS (originals in latex.tex)
+% Use parentheses instead of square brackets in the text.
+\def\@cite#1#2{{#1\if@tempswa , #2\fi})}
+
+% Don't put a label in the bibliography at all.  Just use the unlabeled format
+% instead.
+\def\thebibliography#1{\ifmanuscript\manfont\else\small\fi\parindent=0pt\par\vspace{14pt}{\bf
+References}\par\list
+ {}{\setlength{\labelwidth}{0pt}\setlength{\leftmargin}{1em}
+ \setlength{\itemindent}{-1em}\setlength{\rightmargin}{0pt}
+ \ifmanuscript\setlength{\baselineskip}{2\baselineskip}\fi 
+ \setlength{\itemsep}{0pt}\raggedright}
+ \def\newblock{\hskip .11em plus .33em minus -.07em}
+ \sloppy\clubpenalty4000\widowpenalty4000
+ \sfcode`\.=1000\relax}
+\let\endthebibliography=\endlist
+
+\def\@lbibitem[#1]#2{\item[]\if@filesw 
+      { \def\protect##1{\string ##1\space}\immediate
+        \write\@auxout{\string\bibcite{#2}{#1}}\fi\ignorespaces}}
+
+\def\@bibitem#1{\item\if@filesw \immediate\write\@auxout
+       {\string\bibcite{#1}{\the\c@enumi}}\fi\ignorespaces}
+
+% 
+% endnotes; same environment as bibliography:
+%
+\def\theendnotes{\small\parindent=0pt\par\vspace{14pt}{\bf Notes}\par\vspace{2pt}\everypar{\hangindent=1em\hangafter=1}\raggedright}
+\def\endtheendnotes{\par\vskip 14pt plus 4pt minus 0pt}
+%
+% acknowledgments
+%
+\newenvironment{acknowledgments}{\ifmanuscript\manfont\else\small\fi\par{\bf\noindent Acknowledgments}\par\nobreak\vspace{2pt}\raggedright}{\par} 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% THEOREM-LIKE ENVIRONMENTS
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\newtheorem{example}{Example}
+\newtheorem{rules}{Rule}
+\newtheorem{meta}{Metarule}
+\newtheorem{lemma}{Lemma}
+\newtheorem{lemth}{Theorem}[lemma]
+\newtheorem{theorem}{Theorem}
+\newtheorem{proof}{Proof}
+%
+% Everything that comes before the next line
+% (reading "\def\@thmcounter#1{}") be a numbered environment
+% (e.g., Example 1, Example 2, etc.); everything that comes after will
+% be unnumbered (e.g., Proofs). For numbered theorems, use \begin and
+% \end{numtheorem}. For unnumbered theorems, use \begin and \end{theorem}.
+% See "Guidelines" for more information.
+%
+\def\@thmcounter#1{}
+\newtheorem{rules*}{Rule}
+\newtheorem{proof*}{Proof}
+\newtheorem{theorem*}{Theorem}
+\def\@begintheorem#1#2{\labelsep=1em\itemsep=0pt\topsep=12pt\trivlist \item[\hskip \labelsep{\bf #1\ #2}]\item[]}
+\def\@opargbegintheorem#1#2#3{
+  \labelsep=1em\itemsep=0pt\topsep=12pt\trivlist\item[\hskip \labelsep{\bf\sl #1\ #2\hskip 1em\normalsize\bf\sl #3}]\item[]}
+\def\@endtheorem{\endtrivlist}
+%
+\def\endproof{\hskip 6pt\rule{6pt}{6pt}\par\@endparenv}
+\expandafter\let\csname endproof*\endcsname\endproof
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% ABSTRACT
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\def\abs{\@setsize\abs{13pt}\xpt\@xpt}
+\def\abstract{\par\abs\it\noindent\hskip -.1pt}
+\def\endabstract{\par\normalsize}
+
+\long\def\btitle#1{\vskip 0pt plus 2pt minus 1pt{\parindent=0pt{\bit\bf\vspace{12pt}\par#1\par}}}
+\long\def\bauth#1{{\vspace{6pt}\parindent=0pt{\small\par\raggedright\bf#1\par}}}
+\long\def\baffil#1{{\parindent=0pt{\small\par(#1)\par}}}
+\long\def\bpub#1{{\parindent=0pt\vspace{6pt}{\small\par\raggedright#1\par}}}
+\long\def\binfo#1{{\parindent=0pt\vspace{5pt}{\bi\par#1\par}}}
+\long\def\bref#1{\par\small{\parindent=0pt\vspace{6pt}{References\par\everypar{\hangindent=1em\hangafter=1}#1\par}}}
+
+\def\rtitle#1{{\parindent=0pt\vspace{12pt}{\raggedright\large\bf #1\par}}}
+\def\rauth#1{{\parindent=0pt\vspace{12pt}{\bf#1\par}}}
+\def\raffil#1{{\parindent=0pt\par(#1)}}
+\def\rpub#1{{\parindent=0pt\vspace{15pt}{\parindent=0pt\par\parbox{15pc}{\raggedright#1}}}}
+\def\reviewed#1{{\parindent=0pt\vspace{14pt}\par{\it Reviewed by\\#1\par\vspace{12pt}}}}
+
+\def\entry#1#2#3{{\par\vskip 0pt plus 2pt minus 1pt
+\parindent=0pt\raggedright\vspace{10pt}{\bit\bf#1\par}{\small\bf#2\par}{\small#3\par}\vspace{5pt}}\noindent\ignorespaces}
+
+\newbox\partialpage
+\def\starttwocolumn{%
+  {\output={\global\setbox\partialpage=\vbox{\unvbox255}}\newpage}%
+  \twocolumn[\unvbox\partialpage\vspace{14pt}]%
+}
+
+
+\columnsep 2pc
+
+
+\def\hlinecr{\\[3pt]\hline}
+
+\def\labelitemi{$\bullet$}
+\def\labelitemii{\bf \rlap{---}}
+\def\labelitemiii{$\ast$}
+\def\labelitemiv{$\cdot$}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Footnotes
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\setcounter{topnumber}{3}
+\def\topfraction{.99}
+\setcounter{bottomnumber}{2}
+\def\bottomfraction{.99}
+\setcounter{totalnumber}{3}
+\def\textfraction{.01}
+\def\floatpagefraction{.01}
+\setcounter{dbltopnumber}{3}
+\def\dbltopfraction{.99}
+\def\dblfloatpagefraction{.01}
+%
+% Title for Technical Correspondence
+%
+\def\tcmaketitle{\cleardoublepage\font\BN=PalatinoB at 18pt
+\thispagestyle{plain}\vspace*{-3.5pc}\noindent{\BN Technical Correspondence}\vspace{24pt}
+{\def\cleardoublepage{}\def\newpage{}\def\bf{\tf}\def\LARGE{\@setsize\LARGE{18pt}\xviipt\@xviipt}\font\tf=Palatino at
+16pt\maketitle}}
+%
+% Title for Review Article
+%
+\def\rcmaketitle{\cleardoublepage\font\BN=PalatinoB at 18pt
+\thispagestyle{plain}\vspace*{-3.5pc}\noindent{\BN Review Article}\vspace{24pt}
+{\def\cleardoublepage{}\def\newpage{}\def\bf{\tf}\def\LARGE{\@setsize\LARGE{18pt}\xviipt\@xviipt}\font\tf=Palatino at
+16pt\maketitle}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Some Macros added to cl.sty or some redefined on 07-Feb-05
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\marginparsep5pc
+\marginparwidth5pc
+%
+\def\comment{\@ifnextchar[\@comment{\@comment[\relax]}}
+\def\@comment[#1]#2{\marginpar{\ifx#1\relax\else\vspace*{#1}\fi\bf\raggedright#2}}
+%
+\def\dochead#1{\gdef\@dochead{#1}}
+%
+\newcount\aucount
+\newcount\tempcount
+%
+\def\author{\@dblarg{\@author}}
+\def\@author[#1]#2{\global\advance\aucount\@ne%
+   \expandafter\gdef\csname author\romannumeral\aucount\endcsname{#2}%
+}
+\def\affil#1{%
+   \expandafter\gdef\csname affil\romannumeral\aucount\endcsname{#1}%
+}
+%
+\def\@maketitle{\pagestyle{empty}\cleardoublepage%
+\pagestyle{headings}%
+\markboth{\Rauthor}{\Rtitle}%
+ \null
+\vskip -18pt
+ \@ifundefined{@dochead}{}{\vskip -30pt%
+ {\LARGE\noindent\bf \parbox[t]{28pc}{\raggedright\@dochead} \par}%
+ \vskip4pc}%
+ {\LARGE\noindent\bf \parbox[t]{28pc}{\raggedright\@title} \par} \vskip 1.5em\vskip 14pt {\large \lineskip .5em
+  \tempcount\@ne
+  \@whilenum\aucount>\z@
+  \do{%
+    \ifnum\tempcount=\@ne\noindent\else\ifodd\tempcount\vskip.5cm\noindent\fi\fi
+    \parbox[t]{.5\textwidth}{\rightskip1pc plus1fill%
+       \csname author\romannumeral\tempcount\endcsname\par
+       {\affilfont\csname affil\romannumeral\tempcount\endcsname\par}
+    }   
+    \advance\aucount\m@ne\advance\tempcount\@ne
+  }
+ \par
+ \ifx\@pubinfo\@empty\else\vskip12pt
+   {\parindent\z@\@pubinfo\par}
+ \fi
+ \ifx\@reviewer\@empty\else\vskip12pt
+   {\parindent\z@\itshape Reviewed by\par\@reviewer\par}
+ \fi
+ \par}
+ \vskip 1.5em\vskip 14pt} 
+%
+\let\oldabstract\abstract
+\def\abstract{\oldabstract\ifmanuscript\manfont\setlength{\baselineskip}{2\baselineskip}\fi\ignorespaces} 
+%
+\def\@historydates{}
+\def\historydates#1{\gdef\@historydates{#1}}
+%\def\numdefname{Definition}
+%\newtheorem{numdef}{\numdefname}%[section]
+\newenvironment{arabiclist}{\renewcommand\labelenumi{\arabic{enumi}.}\begin{enumerate}}{\end{enumerate}}
+\newenvironment{alphalist}{\renewcommand\labelenumi{\alpha{enumi}}\begin{enumerate}}{\end{enumerate}}
+\newenvironment{dialogue}{\par\addvspace{12pt plus2pt}\ifmanuscript\manfont\setlength{\baselineskip}{2\baselineskip}\else\normalsize\fi\hangindent18pt\parindent\z@}{\par\addvspace{12pt plus2pt}\@endparenv} 
+\newenvironment{deflist}{\par\list{}{\leftmargin18pt\rightmargin18pt\itemindent-\leftmargin\labelwidth\z@\labelsep\z@\itemsep6pt\topsep12pt plus2pt\let\makelabel\definitionlabel}\raggedright}{\endlist}
+\def\definitionlabel#1{{\bfseries #1:} }
+%
+\let\oldextract\extract
+\def\extract{\oldextract\ifmanuscript\manfont\setlength{\baselineskip}{2\baselineskip}\fi\ignorespaces} 
+\let\oldendextract\endextract
+\def\endextract{\oldendextract\@endparenv}
+%
+\let\oldacknowledgments\acknowledgments
+\def\acknowledgments{\par\vspace{1pc}\oldacknowledgments\ifmanuscript\setlength{\baselineskip}{2\baselineskip}\fi\ignorespaces}
+%%
+\newcounter{eqnnosave}          % used in trick with equation number
+\newenvironment{exlist}{%         % define "example" environment
+   \def\labelenumi{\hspace*{-5pt}(\theenumi)}
+   \def\theenumii{\arabic{enumii}}\def\labelenumii{\theenumii.}%
+   \begin{enumerate}%
+   \setcounter{enumi}{\arabic{eqnnosave}}%   % restores previous value
+}%
+{\end{enumerate}%
+\setcounter{eqnnosave}{\arabic{enumi}}}%
+%
+\newlength\figheight
+\newlength\figwidth
+\newbox\figtempbox
+\def\ArtPiece#1{\epsfbox{\ArtDir#1}}%
+\let\figboxformat\leftline
+%
+\def\figurebox#1#2#3{%
+    \@ifnextchar[{\@figurebox{#1}{#2}{#3}}{\@figurebox{#1}{#2}{#3}[]}}
+%
+\def\@figurebox#1#2#3[#4]{%
+      \gdef\@figscale{#3}
+      \gdef\@frtharg{#4}
+      \ifx\@frtharg\empty
+         \global\figheight=#1
+         \global\figwidth=#2
+      \else 
+         \setbox\figtempbox=\hbox{\ifx\@figscale\empty\else\epsfxsize\@figscale\fi\epsfbox{\ArtDir#4}}%
+         \global\figwidth=\wd\figtempbox
+         \global\figheight=\ht\figtempbox
+      \fi
+      {\figboxformat{\figbox}}}%
+%
+\def\figbox{%
+     \ifx\@frtharg\empty  
+       \noindent\vbox{\hsize\figwidth%
+	      \hrule\hbox to\figwidth{\vrule\hfill\vbox to\figheight{\hsize\figwidth\vfill}\vrule}\hrule}%
+     \else
+        \vbox{\vskip.8pt\hsize\figwidth
+ 	      \hbox to\figwidth{\vbox to\figheight{\hsize\figwidth\box\figtempbox}}}%
+     \fi}
+%
+\def\fulltabular{\def\@halignto{to \textwidth}\@tabular}
+\def\endfulltabular{\endtabular}
+%
+\let\toprule\relax
+\let\botrule\hline
+\let\colrule\hline
+\let\crule\cline
+%%
+% command to add a section to the appendix
+\newcommand{\appendixsection}[1]{\addtocounter{section}{1}%
+   \setcounter{table}{0}
+   \setcounter{figure}{0}
+   \setcounter{equation}{0}
+  \section*{Appendix \Alph{section}: #1}%
+  \addtocontents{toc}{\contentsline{section}{\numberline{\Alph{section}} #1}{\arabic{page}}}}
+%
+\renewcommand\appendix{%
+   \setcounter{section}{0}
+   \renewcommand{\theequation}{\Alph{section}.\arabic{equation}}
+   \addtocontents{toc}{\contentsline {section}{Appendix\\}{}}
+}
+%
+\newenvironment{displaytext}{\par\addvspace{.5\baselineskip}\parindent\z@\hangindent2em}{\par\addvspace{.5\baselineskip}\@endparenv}
+\newenvironment{algorithm}{\begin{description}}{\end{description}}
+%
+\let\org@enddocument\enddocument
+\def\enddocument{%
+   \ifx\@biography\@empty\else{\par\vskip10pt\noindent\@biography\par}\fi
+   \org@enddocument}
+%
+\sloppy
+%
+\usepackage{multicol}
+%
+\voffset3pc
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% End
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\endinput
